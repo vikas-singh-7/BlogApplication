@@ -31,14 +31,13 @@ const App = () => {
     <div className="min-h-screen bg-slate-600 flex flex-wrap content-between">
       <div className="w-full block">
         <Header />
-        todo {/* <Outlet /> */}
+
+        <Outlet />
         <Footer />
       </div>
     </div>
   ) : (
-    <div className="h-full w-full text-white flex flex-wrap justify-center align-center bg-black-400">
-      oops page not found please login
-    </div>
+   null
   );
 };
 

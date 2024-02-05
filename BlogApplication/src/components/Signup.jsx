@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import authService from "../appwrite/authService";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Input, Logo } from "./index";
-import { UseDispatch, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { logIn } from "../features/authSlice";
-
-import React from "react";
 
 const Signup = () => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
-import React, { useId } from "react";
-const Input = React.useRef(function Input(
+import React, { useId, forwardRef } from "react";
+const Input = forwardRef(function Input(
   { label, type = "text", className = "", ...props },
   ref
 ) {
@@ -19,7 +19,7 @@ const Input = React.useRef(function Input(
         id={id}
       />
     </div>
-  ); 
+  );
 });
 
 export default Input;
