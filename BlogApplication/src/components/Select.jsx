@@ -1,6 +1,6 @@
 import React, { useId } from "react";
 
-const Selectbox = ({ options = [], label, className = "", ...props }, ref) => {
+const Select = ({ options = [], label, className = "", ...props }, ref) => {
   const id = useId();
   return (
     <div className="w-full">
@@ -23,4 +23,4 @@ const Selectbox = ({ options = [], label, className = "", ...props }, ref) => {
   );
 };
 
-export default React.forwardRef(Selectbox);
+export default React.forwardRef(Select);

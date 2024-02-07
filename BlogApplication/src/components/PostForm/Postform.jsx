@@ -1,25 +1,29 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { Selectbox, Button, Logo, Input, RTE } from "../index";
+import { Select, Button, Input, RTE } from "../index";
 import appwriteService from "../../appwrite/databaseConfig";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 const Postform = ({ post }) => {
   const { register, watch, handleSubmit, setValue, control, getValues } =
     useForm({
       defaultValues: {
         title: post?.title || "",
-        slug: post?.slug || "",
+        slug: post?.$id || "",
         content: post?.content || "",
-        status: post?.status || "",
+        status: post?.status || "active",
       },
     });
   const navigate = useNavigate();
   const userData = useSelector((state) => state.Authentication.userData);
 
   const submit = async (data) => {
+    console.log("button presseed");
     if (post) {
-      data.image[0] ? appwriteService.uplaodFile(data.image[0]) : null;
+      const file = data.image[0]
+        ? appwriteService.uplaodFile(data.image[0])
+        : null;
 
       if (file) {
         appwriteService.deleteFile(post.featuredimage);
@@ -33,9 +37,9 @@ const Postform = ({ post }) => {
       } else {
         const file = await appwriteService.uplaodFile(data.image[0]);
         if (file) {
-          const fileID = file.$id;
-          data.featuredimage = fileID;
-          await appwriteService.createPost({
+          const fileId = file.$id;
+          data.featuredimage = fileId;
+          const dbPost = await appwriteService.createPost({
             ...data,
             userId: userData.$id,
           });
@@ -52,20 +56,17 @@ const Postform = ({ post }) => {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
-      return "";
     }
+    return "";
   }, []);
   React.useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === "title") {
-        setValue(
-          "slug",
-          slugTransform(value.title, {
-            shouldValidate: true,
-          })
-        );
+        setValue("slug", slugTransform(value.title), {
+          shouldValidate: true,
+        });
       }
     });
     return () => {
@@ -116,7 +117,7 @@ const Postform = ({ post }) => {
             />
           </div>
         )}
-        <Selectbox
+        <Select
           options={["active", "inactive"]}
           label="Status"
           className="mb-4"

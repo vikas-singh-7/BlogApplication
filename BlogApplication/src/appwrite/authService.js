@@ -1,6 +1,7 @@
 import confg from "../confg/confg"; // env imported
 
-import { Client, Account, ID } from "appwrite"; // client account id imported fro appwrite as they are needed to make authenticate service
+import { Client, Account, ID } from "appwrite" 
+// client account id imported fro appwrite as they are needed to make authenticate service
 
 // make a class which has service which has some methods which will contact with backend
 
@@ -38,6 +39,7 @@ export class AuthService {
       }
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 
@@ -47,6 +49,7 @@ export class AuthService {
       return await this.account.createEmailSession(email, password);
     } catch (error) {
       console.log(error);
+      throw error
     }
   }
 

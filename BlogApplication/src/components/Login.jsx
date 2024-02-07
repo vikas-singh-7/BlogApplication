@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { logIn as authLogin } from "../features/authSlice";
+import { login as authLogin } from "../features/authSlice";
 import { Button, Input, Logo } from "./index";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/authService";
 import { useForm } from "react-hook-form";
+
+
 const Login = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
@@ -56,11 +59,10 @@ const Login = () => {
               {...register("email", {
                 required: true,
                 validate: {
-                  matchPatern: (value) => {
-                    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,3}$/.test(value) ||
-                      "Enter a valid Email address";
+                  matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                      "Enter a valid Email address"
                   },
-                },
+                
               })}
             />
             <Input

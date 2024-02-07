@@ -1,12 +1,12 @@
 import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
+import Footer from "./footer/Footer";
 import Container from "./container/Container";
 import Logo from "./Logo";
 import Input from "./Input";
 import LogoutBtn from "./Header/LogoutBtn";
 import Button from "./Button";
 import RTE from "./RTE";
-import Selectbox from "./Selectbox";
+import Select from "./Select";
 import Signup from "./Signup";
 import Login from "./Login";
 import Postform from "./PostForm/Postform";
@@ -18,7 +18,7 @@ export {
   PostCard,
   Login,
   Signup,
-  Selectbox,
+  Select,
   RTE,
   Header,
   Footer,

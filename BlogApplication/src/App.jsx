@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import authService from "./appwrite/authService";
-import { logIn, logOut } from "./features/authSlice";
+import { login, logout } from "./features/authSlice";
 import { Header, Footer } from "./components/index";
 import { Outlet } from "react-router-dom";
 
@@ -12,13 +12,12 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    authService
-      .getCurrentUser()
-      .then((userData) => {
+    authService.getCurrentUser()
+     .then((userData) => {
         if (userData) {
-          dispatch(logIn({ userData }));
+          dispatch(login({ userData }));
         } else {
-          dispatch(logOut());
+          dispatch(logout());
         }
       })
       .finally(() => {

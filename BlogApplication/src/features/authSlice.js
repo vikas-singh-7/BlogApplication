@@ -9,23 +9,23 @@ const initialState = {
 };
 
 const authSlice = createSlice({
-  initialState,
   name: "auth",
+  initialState,
   reducers: {
     // reducers is a object wich carries method name as key and method defination as value
 
-    logIn: (state, action) => {
+    login: (state, action) => {
       state.status = true;
-      state.userData = action.payload;
+      state.userData = action.payload.userData;
     },
 
-    logOut: (state, action) => {
+    logout: (state) => {
       state.status = false;
       state.userData = null;
     },
   },
 });
 
-export const { logIn, logOut } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 
 export default authSlice.reducer;

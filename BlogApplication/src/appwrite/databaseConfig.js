@@ -1,4 +1,4 @@
-import confg from "../confg/confg.js";
+import confg from "../confg/confg";
 
 import { Client, Databases, Query, ID, Storage } from "appwrite";
 
@@ -111,22 +111,20 @@ export class Service {
 
   async deleteFile(fileId) {
     try {
-      return await this.bucket.deleteFile(confg.appWriteBucketId, fileId);
+      await this.bucket.deleteFile(confg.appWriteBucketId, fileId);
       return true;
     } catch (error) {
       console.log(error);
+      return false;
     }
   }
 
   getFilePreview(fileId) {
-    return this.bucket.getFilePreview(confg.appWriteCollectionId, fileId);
+    return this.bucket.getFilePreview(confg.appWriteBucketId, fileId);
   }
 
-  getFileDownload(fileId){
-
-    return this.bucket.getFileDownload(confg.appWriteBucketId,
-        fileId)
-
+  getFileDownload(fileId) {
+    return this.bucket.getFileDownload(confg.appWriteBucketId, fileId);
   }
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import service from "../appwrite/databaseConfig";
+import appwriteService from "../appwrite/databaseConfig";
 import { Link } from "react-router-dom";
 
 const PostCard = ({ $id, title, featuredimage }) => {
@@ -8,7 +8,7 @@ const PostCard = ({ $id, title, featuredimage }) => {
       <div className="w-full bg-gray-100 rounded-xl p-4">
         <div className="w-full justify-center mb-4">
           <img
-            src={service.getFilePreview(featuredimage)}
+            src={appwriteService.getFilePreview(featuredimage)}
             alt={title}
             className="rounded-xl"
           />
