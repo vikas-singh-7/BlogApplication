@@ -22,35 +22,39 @@ const Postform = ({ post }) => {
     console.log("button presseed");
     if (post) {
       const file = data.image[0]
-        ? appwriteService.uplaodFile(data.image[0])
+        ? await appwriteService.uplaodFile(data.image[0])
         : null;
 
       if (file) {
         appwriteService.deleteFile(post.featuredimage);
       }
+
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
         featuredimage: file ? file.$id : undefined,
       });
+
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
-      } else {
-        const file = await appwriteService.uplaodFile(data.image[0]);
-        if (file) {
-          const fileId = file.$id;
-          data.featuredimage = fileId;
-          const dbPost = await appwriteService.createPost({
-            ...data,
-            userId: userData.$id,
-          });
-          if (dbPost) {
-            navigate(`/post/${dbPost.$id}`);
-          }
+      }
+    } else {
+      const file = await appwriteService.uplaodFile(data.image[0]);
+
+      if (file) {
+        const fileId = file.$id;
+        data.featuredimage = fileId;
+        const dbPost = await appwriteService.createPost({
+          ...data,
+          userId: userData.$id,
+        });
+
+        if (dbPost) {
+          navigate(`/post/${dbPost.$id}`);
         }
       }
+      console.log("post aded successfully ");
     }
   };
-
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string") {
       return value
