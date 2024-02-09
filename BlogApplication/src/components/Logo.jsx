@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function Logo({width = '100px'}) {
+function Logo() {
   return (
-    <div>Logo</div>
-  )
+    <div className="border rounded-full overflow-hidden">
+      <img src="../public/Logo.jpg" alt="" width="70px" />
+    </div>
+  );
 }
 
-export default Logo
+export default Logo;

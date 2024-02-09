@@ -30,7 +30,6 @@ const App = () => {
     <div className="min-h-screen bg-slate-600 flex flex-wrap content-between">
       <div className="w-full block">
         <Header />
-
         <Outlet />
         <Footer />
       </div>
